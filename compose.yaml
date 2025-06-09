@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - backend
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    restart: always
+
+  ship_hvac_simulator:
+    build: ./scripts
+    command: ["uv","run", "scripts/ship_hvac_simulator.py"]
+    volumes:
+      - .:/app
+    networks:
+      - backend
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+networks:
+  backend:
+    driver: bridge

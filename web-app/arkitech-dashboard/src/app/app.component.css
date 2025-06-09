@@ -1,0 +1,10 @@
+mat-toolbar {
+    background-color: var(--mat-sys-primary);
+    color: #fff;
+}
+
+
+.dashboard-header{
+    padding: 10px;
+    text-align: center;;
+}
