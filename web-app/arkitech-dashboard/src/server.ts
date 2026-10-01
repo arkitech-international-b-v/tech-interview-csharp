@@ -10,7 +10,11 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const indexHtml = join(serverDistFolder, 'index.server.html');
 
 const app = express();
-const commonEngine = new CommonEngine();
+// Hostnames SSR may render for. The dashboard is only served locally; any
+// other Host header falls back to client-side rendering (Angular SSRF guard).
+const commonEngine = new CommonEngine({
+  allowedHosts: ['localhost', '127.0.0.1'],
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
